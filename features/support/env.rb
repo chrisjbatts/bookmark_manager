@@ -2,13 +2,13 @@
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'lib/bookmark_manager.rb')
+require File.join(File.dirname(__FILE__), '..', '..', './server.rb')
 
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.app = BookmarkManager
+Capybara.app = BookmarkManager.new
 
 class BookmarkManagerWorld
   include Capybara::DSL

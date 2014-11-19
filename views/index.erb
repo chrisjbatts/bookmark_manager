@@ -1,0 +1,17 @@
+<h1>Just Another Bookmark Manager</h1>
+<p><i>Don't get too excited</i></p>
+<h2>Current Links:</h2>
+<ul>
+  <% @links.each do |link| %>
+    <li><a href="<%= link.url %>"><%= link.title %></a></li>
+  <% end %>
+</ul>
+
+<div id="new-link">
+  <form action="/links" method="post">
+    Url: <input type="text" name="url">
+    Title: <input type="text" name="title">
+    Tags: <input type="text" name="tags">
+    <input type="submit" value="Add link">
+  </form>
+</div>
