@@ -15,7 +15,7 @@ feature "User browses the list of links" do
                 :tags => [Tag.first_or_create(:text => 'search')])
     Link.create(:url => "http://www.code.org",
                 :title => "Code.org",
-                :tags => [Tag.first_or_create(:text => 'education')])
+                :tags => [Tag.first_or_create(:text => '')])
 
   }
 

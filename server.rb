@@ -1,7 +1,6 @@
 require 'sinatra/base'
 require 'data_mapper'
 
-
 env = ENV["RACK_ENV"]  || "development"
 
 DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{env}")
@@ -12,6 +11,14 @@ require './lib/user.rb'
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
+
+  # helpers do
+
+    def current_user
+      @current_user ||= User.get(session[:user_id]) if session[:user_id]
+    end
+
+  # end
 
 class BookmarkManager < Sinatra::Base
 
@@ -41,24 +48,19 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/users' do
-    User.create(:email => params[:email],
+    user = User.new(:email => params[:email],
                 :password => params[:password])
-    session[:user_id] = User.id
+    user.save
+    session[:user_id] = user.id
     redirect to('/')
   end
 
   enable :sessions
   set :session_secret, 'super secret'
 
+
+
   # start the server if ruby file executed directly
   run! if app_file == $0
-
-  helpers do
-
-    def current_user
-      @current_user ||=User.get(session[:user_id]) if session[:user_id]
-    end
-
-  end
 
 end
