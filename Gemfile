@@ -5,6 +5,7 @@ gem 'database_cleaner'
 gem 'dm-postgres-adapter'
 gem 'rack'
 gem 'sinatra'
+gem 'bcrypt-ruby'
 
 group :development, :test do
   gem 'launchy'
