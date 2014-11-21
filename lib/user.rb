@@ -5,12 +5,13 @@ class User
   include DataMapper::Resource
 
   validates_confirmation_of :password
+  validates_uniqueness_of :email
 
   attr_reader :password
   attr_writer :password_confirmation
 
   property :id,                 Serial
-  property :email,              String
+  property :email,              String,   :unique => true,    :message => "Sorry, your passwords don't match"
   property :password_digest,    Text
 
   def password=(password)
