@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
+gem 'bcrypt-ruby'
 gem 'data_mapper'
 gem 'database_cleaner'
 gem 'dm-postgres-adapter'
 gem 'rack'
+gem 'rack-flash3'
 gem 'sinatra'
-gem 'bcrypt-ruby'
 
 group :development, :test do
   gem 'launchy'
