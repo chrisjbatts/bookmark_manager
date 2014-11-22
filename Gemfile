@@ -7,6 +7,7 @@ gem 'dm-postgres-adapter'
 gem 'rack'
 gem 'rack-flash3'
 gem 'sinatra'
+gem 'sinatra-partial'
 
 group :development, :test do
   gem 'launchy'

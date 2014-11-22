@@ -8,6 +8,8 @@ require './lib/user.rb'
 require_relative './helpers/application.rb'
 require_relative './data_mapper_setup.rb'
 
+use Rack::MethodOverride
+
 class BookmarkManager < Sinatra::Base
 
   enable :sessions
