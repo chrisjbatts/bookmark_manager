@@ -12,10 +12,9 @@ class BookmarkManager < Sinatra::Base
 
   enable :sessions
   set :session_secret, 'super secret'
-
   use Rack::Flash
 
-  set :views, Proc.new{File.join(root,'views')}
+  set :views, Proc.new{File.join(root, 'views')}
   
   get '/' do
     @links = Link.all
@@ -54,7 +53,28 @@ class BookmarkManager < Sinatra::Base
     end
   end
 
+  post '/sessions' do
+    email, password = params[:email], params[:password]
+    user = User.authenticate(email, password)
+    if user
+      session[:user_id] = user.id
+      redirect to('/')
+    else
+      flash[:errors] = ["The email or password is incorrect"]
+      erb :"sessions/new"
+    end
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
+
+  def self.authenticate(email, password)
+    user = first(:email => email)
+    if user && BCrypt::Password.new(user.password_digest) == password
+      user
+    else
+      nil
+    end
+  end
 
 end
